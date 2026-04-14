@@ -74,9 +74,9 @@ const MENU = [
   {
     category: "Aperitivo",
     items: [
-      { name: "Spritz", price: 5.0 },
-      { name: "Campari Soda / Cedrato", price: 3.0 },
-      { name: "Campari Soda + Gin", price: 4.0 },
+      { name: "Spritz", price: 5.0, desc: "Aperol, Prosecco, soda, arancia." },
+      { name: "Campari Soda / Cedrato", price: 3.0, desc: "Servito freddo." },
+      { name: "Campari Soda + Gin", price: 4.0, desc: "Campari Soda, gin." },
     ],
   },
   {
@@ -151,9 +151,9 @@ const MENU = [
   {
     category: "Analcolici",
     items: [
-      { name: "San Francisco", price: 5.0 },
-      { name: "Icon", price: 6.0 },
-      { name: "Rose Lemon Spritzer", price: 5.0 },
+      { name: "San Francisco", price: 5.0, desc: "Succo d’arancia, ananas, grenadine." },
+      { name: "Icon", price: 6.0, desc: "Signature analcolico (chiedi la ricetta)." },
+      { name: "Rose Lemon Spritzer", price: 5.0, desc: "Limonata, note floreali, soda." },
     ],
   },
 ];
