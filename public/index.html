@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light" />
-    <title>ICON • Menu</title>
+    <title>ICON • Bar</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,57 +14,44 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <header class="topbar" role="banner">
-      <div class="topbar__inner">
-        <div class="topbar__row">
-          <a class="brandmark" href="#" aria-label="ICON">
-            <img class="brandmark__logo" src="./assets/logo.svg" alt="" aria-hidden="true" />
-          </a>
+    <main class="main landing" role="main">
+      <div class="container">
+        <div class="landing__hero">
+          <div class="landing__mark" aria-hidden="true">
+            <img class="landing__logo" src="./assets/logo.svg" alt="" />
+          </div>
 
-          <div class="search">
-            <label class="search__label" for="q">Cerca</label>
-            <input
-              id="q"
-              class="search__input"
-              inputmode="search"
-              autocomplete="off"
-              autocapitalize="none"
-              spellcheck="false"
-              placeholder="Cerca un prodotto…"
-              aria-label="Cerca nel menu"
-            />
-            <button id="clear" class="search__clear" type="button" aria-label="Cancella ricerca">
-              <span aria-hidden="true">×</span>
-            </button>
+          <div class="landing__content">
+            <div class="landing__kicker">ICON</div>
+            <h1 class="landing__title">Bar &amp; Caffè</h1>
+            <p class="landing__lead">Cocktail, caffetteria e aperitivi. Atmosfera calda, servizio semplice.</p>
+
+            <div class="landing__cta">
+              <a class="btn btn--primary" href="/menu">Apri il menu</a>
+              <a
+                class="btn btn--ghost"
+                href="https://instagram.com/icon_caffe"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Instagram
+              </a>
+            </div>
+
+            <div class="landing__meta" aria-label="Info">
+              <a class="landing__pill" href="/menu">Menu digitale</a>
+              <a
+                class="landing__pill"
+                href="https://instagram.com/icon_caffe"
+                target="_blank"
+                rel="noreferrer"
+              >
+                @icon_caffe
+              </a>
+            </div>
           </div>
         </div>
-
-        <nav class="chips" aria-label="Categorie">
-          <button class="chip is-active" data-chip="all" type="button">Tutto</button>
-        </nav>
-      </div>
-    </header>
-
-    <main class="main" role="main">
-      <div class="container">
-        <div class="meta">
-          <div id="count" class="meta__count" aria-live="polite"></div>
-          <button id="reset" class="meta__reset" type="button">Azzera</button>
-        </div>
-
-        <div id="menu" class="menu" aria-label="Menu"></div>
       </div>
     </main>
-
-    <footer class="footer">
-      <div class="container footer__inner">
-        <div class="footer__note">
-          Prezzi in €.
-          <span class="muted">Per allergeni e disponibilità, chiedi al personale.</span>
-        </div>
-      </div>
-    </footer>
-
-    <script src="./app.js" defer></script>
   </body>
 </html>

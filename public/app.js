@@ -334,3 +334,5 @@ const setTopbarOffset = () => {
 };
 setTopbarOffset();
 window.addEventListener("resize", setTopbarOffset, { passive: true });
+
+// If this JS is included on non-menu pages, do nothing gracefully
