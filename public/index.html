@@ -16,29 +16,27 @@
   <body>
     <header class="topbar" role="banner">
       <div class="topbar__inner">
-        <div class="brand" aria-label="ICON">
-          <img class="brand__logo" src="./assets/logo.svg" alt="" aria-hidden="true" />
-          <div class="brand__stack">
-            <div class="brand__title">ICON</div>
-            <div class="brand__subtitle">Bar Menu</div>
-          </div>
-        </div>
+        <div class="topbar__row">
+          <a class="brandmark" href="#" aria-label="ICON">
+            <img class="brandmark__logo" src="./assets/logo.svg" alt="" aria-hidden="true" />
+          </a>
 
-        <div class="search">
-          <label class="search__label" for="q">Cerca</label>
-          <input
-            id="q"
-            class="search__input"
-            inputmode="search"
-            autocomplete="off"
-            autocapitalize="none"
-            spellcheck="false"
-            placeholder="Cerca un prodotto…"
-            aria-label="Cerca nel menu"
-          />
-          <button id="clear" class="search__clear" type="button" aria-label="Cancella ricerca">
-            <span aria-hidden="true">×</span>
-          </button>
+          <div class="search">
+            <label class="search__label" for="q">Cerca</label>
+            <input
+              id="q"
+              class="search__input"
+              inputmode="search"
+              autocomplete="off"
+              autocapitalize="none"
+              spellcheck="false"
+              placeholder="Cerca un prodotto…"
+              aria-label="Cerca nel menu"
+            />
+            <button id="clear" class="search__clear" type="button" aria-label="Cancella ricerca">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
         </div>
 
         <nav class="chips" aria-label="Categorie">

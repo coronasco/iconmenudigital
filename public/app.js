@@ -326,3 +326,11 @@ const onScroll = () => {
 };
 onScroll();
 window.addEventListener("scroll", onScroll, { passive: true });
+
+// keep content perfectly offset under fixed topbar
+const setTopbarOffset = () => {
+  const h = topbarEl?.offsetHeight || 0;
+  document.documentElement.style.setProperty("--topbar-offset", `${h}px`);
+};
+setTopbarOffset();
+window.addEventListener("resize", setTopbarOffset, { passive: true });
