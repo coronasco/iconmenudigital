@@ -28,7 +28,11 @@ body::before{
   position: fixed;
   inset: 0;
   z-index: -3;
-  background: url("./assets/bg.png") center / cover no-repeat fixed;
+  background-image: url("./assets/bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
   filter: saturate(1.05) contrast(1.02);
 }
 
@@ -301,4 +305,20 @@ body::after{
   :root{ --pad: 20px; }
   .topbar__inner{ padding: 16px 0 14px; }
   .search__input{ font-size: 16px; }
+}
+
+/* Mobile Safari/Chrome: fixed backgrounds can render oddly; keep cover but switch attachment */
+@media (max-width: 520px){
+  body::before{
+    background-attachment: scroll;
+    /* better framing for tall screens */
+    background-position: 25% center;
+  }
+}
+
+/* iOS-specific: ensure stable cover rendering */
+@supports (-webkit-touch-callout: none){
+  body::before{
+    background-attachment: scroll;
+  }
 }
