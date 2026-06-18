@@ -4,23 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light" />
-    <title>ICON • Menu</title>
+    <title>Menu | ICON Caffè Torino</title>
+    <meta
+      name="description"
+      content="Listino digitale di ICON Caffè con caffetteria, bibite, panini, birre, vini, aperitivi e distillati."
+    />
+    <link rel="canonical" href="https://iconcaffe.com/menu" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:site_name" content="ICON Caffè" />
+    <meta property="og:title" content="Menu | ICON Caffè Torino" />
+    <meta
+      property="og:description"
+      content="Listino digitale di ICON Caffè con caffetteria, bibite, panini, birre, vini, aperitivi e distillati."
+    />
+    <meta property="og:url" content="https://iconcaffe.com/menu" />
+    <meta property="og:image" content="https://iconcaffe.com/assets/bg.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Menu | ICON Caffè Torino" />
+    <meta
+      name="twitter:description"
+      content="Listino digitale di ICON Caffè con caffetteria, bibite, panini, birre, vini, aperitivi e distillati."
+    />
+    <meta name="twitter:image" content="https://iconcaffe.com/assets/bg.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../styles.css?v=20260618h" />
   </head>
-  <body>
-    <header class="topbar" role="banner">
-      <div class="topbar__inner">
-        <div class="topbar__row">
-          <a class="brandmark" href="/" aria-label="Home">
+  <body class="page page--menu">
+    <header class="menu-topbar" role="banner">
+      <div class="menu-topbar__shell">
+        <div class="menu-topbar__inner">
+          <a class="brandmark" href="/" aria-label="Torna alla home">
             <img class="brandmark__logo" src="../assets/logo.svg" alt="" aria-hidden="true" />
+            <span class="brandmark__label">ICON Caffè</span>
           </a>
-
+          <nav class="menu-topbar__links" aria-label="Navigazione secondaria">
+            <a href="/">Home</a>
+            <a href="/#about">Il bar</a>
+            <a href="/#info">Info</a>
+          </nav>
           <div class="search">
             <label class="search__label" for="q">Cerca</label>
             <input
@@ -38,22 +65,51 @@
             </button>
           </div>
         </div>
-
         <nav class="chips" aria-label="Categorie">
           <button class="chip is-active" data-chip="all" type="button">Tutto</button>
         </nav>
       </div>
     </header>
 
-    <main class="main" role="main">
-      <div class="container">
-        <div class="meta">
-          <div id="count" class="meta__count" aria-live="polite"></div>
-          <button id="reset" class="meta__reset" type="button">Azzera</button>
+    <main class="menu-page" role="main">
+      <section class="menu-hero">
+        <div class="container">
+          <div class="menu-hero__panel" data-reveal>
+            <div class="menu-hero__intro">
+              <h1 class="menu-hero__title">Listino di ICON</h1>
+              <p class="menu-hero__lead">
+                Una selezione essenziale, pensata per accompagnare con semplicità ogni momento della giornata.
+              </p>
+              <div class="menu-hero__details">
+                <span>Via Pietro Cossa 79/B, Torino</span>
+                <span>Lun - Sab 05:00 - 23:00 · Dom 06:30 - 23:00</span>
+              </div>
+              <div class="menu-hero__links">
+                <a href="https://www.google.com/maps/search/?api=1&amp;query=Via+Pietro+Cossa+79%2FB%2C+10136+Torino" target="_blank" rel="noreferrer">Indicazioni</a>
+                <a href="/">Torna al sito</a>
+              </div>
+            </div>
+            <a class="menu-scrollcue" href="#menu-list" aria-label="Scorri al menu">
+              <span>Scorri</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 5v12" />
+                <path d="m7 12 5 5 5-5" />
+              </svg>
+            </a>
+          </div>
         </div>
+      </section>
 
-        <div id="menu" class="menu" aria-label="Menu"></div>
-      </div>
+      <section class="menu-browser" id="menu-list">
+        <div class="container">
+          <div class="meta">
+            <div id="count" class="meta__count" aria-live="polite"></div>
+            <button id="reset" class="meta__reset" type="button">Azzera filtri</button>
+          </div>
+
+          <div id="menu" class="menu" aria-label="Menu"></div>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
@@ -65,6 +121,6 @@
       </div>
     </footer>
 
-    <script src="../app.js" defer></script>
+    <script type="module" src="../app.js?v=20260618h"></script>
   </body>
 </html>

@@ -1,162 +1,6 @@
-const MENU = [
-  {
-    category: "Caffetteria",
-    items: [
-      { name: "Caffè", price: 1.2 },
-      { name: "Caffè Dek", price: 1.4 },
-      { name: "Caffè Corretto", price: 1.7 },
-      { name: "Caffè Shakerato", price: 2.5 },
-      { name: "Orzo", price: 1.4 },
-      { name: "Ginseng", price: 1.4 },
-      { name: "Cappuccino", price: 1.4 },
-      { name: "Latte Macchiato", price: 2.0 },
-      { name: "Latte (bicchiere)", price: 1.5 },
-      { name: "Marocchino", price: 2.5 },
-      { name: "Tè caldo", price: 3.0 },
-      { name: "Cioccolata calda", price: 3.0 },
-      { name: "Brioche", price: 1.4 },
-      { name: "Brioche di pasticceria", price: 1.5 },
-    ],
-  },
-  {
-    category: "Soft drink",
-    items: [
-      { name: "Red Bull", price: 3.5 },
-      { name: "Chinotto", price: 3.5 },
-      { name: "Ginger Beer", price: 3.5 },
-    ],
-  },
-  {
-    category: "Panini (vari gusti)",
-    items: [
-      { name: "Panino", price: 5.0, desc: "Farciture assortite (chiedi al banco)." },
-      { name: "Piadina", price: 4.0, desc: "Farciture assortite (chiedi al banco)." },
-      { name: "Toast", price: 3.0, desc: "Prosciutto, formaggio." },
-      { name: "Tramezzino", price: 3.0, desc: "Farciture assortite." },
-      { name: "Pizzatine (s/p carciofi)", price: 1.5, desc: "Pomodoro, mozzarella (varianti disponibili)." },
-      { name: "Tagliere (1 pers.)", price: 3.0, desc: "Selezione di salumi e formaggi." },
-    ],
-  },
-  {
-    category: "Vini",
-    items: [
-      { name: "Prosecco", price: 3.5 },
-      { name: "Vino rosso (bicchiere)", price: 3.5 },
-      { name: "Nebbiolo", price: 4.0 },
-      { name: "Vino (bottiglia)", priceText: "15€ / 18€" },
-    ],
-  },
-  {
-    category: "Bibite",
-    items: [
-      { name: "Coca Cola (lattina/vetro)", priceText: "2.50€ / 3.00€" },
-      { name: "Fanta", price: 2.0 },
-      { name: "Lemon Soda (lattina/vetro)", priceText: "2.50€ / 3.00€" },
-      { name: "Schweppes (lattina/vetro)", priceText: "2.50€ / 3.00€" },
-      { name: "Tè freddo al limone/pesca", price: 2.5 },
-      { name: "Succo di frutta", price: 3.0 },
-      { name: "Spremuta (fresh)", price: 4.0 },
-    ],
-  },
-  {
-    category: "Birre",
-    items: [
-      { name: "Heineken (33cl)", price: 3.0 },
-      { name: "Beck's (33cl)", price: 3.0 },
-      { name: "Moretti (66cl)", price: 3.0 },
-      { name: "Corona (33cl)", price: 4.0 },
-      { name: "Ichnusa (33cl)", price: 3.5 },
-      { name: "Ichnusa Non Filtrata (33cl)", price: 3.5 },
-      { name: "Ceres (33cl)", price: 4.0 },
-      { name: "Tennents (33cl)", price: 4.0 },
-    ],
-  },
-  {
-    category: "Aperitivo",
-    items: [
-      { name: "Spritz", price: 5.0, desc: "Aperol, Prosecco, soda, arancia." },
-      { name: "Campari Soda / Cedrato", price: 3.0, desc: "Servito freddo." },
-      { name: "Campari Soda + Gin", price: 4.0, desc: "Campari Soda, gin." },
-    ],
-  },
-  {
-    category: "Liquori",
-    items: [
-      { name: "Grappa Borsciata", price: 3.5 },
-      { name: "Grappa Candolini", price: 3.5 },
-      { name: "Grappa Nonino", price: 3.5 },
-      { name: "Grappa Nardini", price: 3.5 },
-      { name: "Grappa Julia", price: 3.0 },
-      { name: "Amaro Del Capo", price: 3.5 },
-      { name: "Amaro Disaronno", price: 3.5 },
-      { name: "Amaro Jägermeister", price: 3.5 },
-      { name: "Amaro Lucano", price: 3.5 },
-      { name: "Amaro Montenegro", price: 3.5 },
-      { name: "Amaro San Simone", price: 3.5 },
-      { name: "Amaro Fernet Branca", price: 3.5 },
-      { name: "Amaro Unicum", price: 3.5 },
-      { name: "Amaro Ramazzotti", price: 3.5 },
-      { name: "Amaro di Torino", price: 3.5 },
-      { name: "Amaro Mirto", price: 3.5 },
-      { name: "Limoncello", price: 3.5 },
-      { name: "Sambuca", price: 3.5 },
-      { name: "Vecchia Romagna", price: 3.5 },
-      { name: "Couvosier", price: 5.0 },
-      { name: "Grand Marnier", price: 4.0 },
-      { name: "Baileys", price: 3.5 },
-    ],
-  },
-  {
-    category: "Distillati",
-    items: [
-      { name: "Vodka Sky", price: 3.0 },
-      { name: "Vodka Absolut", price: 3.5 },
-      { name: "Vodka Belvedere", price: 7.0 },
-      { name: "Vodka Iceberg", price: 3.0 },
-      { name: "Gin Tanqueray", price: 3.5 },
-      { name: "Gin Bombay", price: 4.0 },
-      { name: "Gin Gordon's", price: 3.5 },
-      { name: "Gin Nally", price: 6.0 },
-      { name: "Gin Mare", price: 7.0 },
-      { name: "Tequila Jose Cuervo", price: 3.5 },
-      { name: "Tequila Especial", price: 4.0 },
-      { name: "Whisky Jack D", price: 5.0 },
-      { name: "Whisky J.D. Fire", price: 6.0 },
-      { name: "Whisky J.D. Apple", price: 5.0 },
-      { name: "Whisky J.D. Honey", price: 5.0 },
-      { name: "Whisky Chivas", price: 5.0 },
-      { name: "Whisky Ballantine's", price: 4.0 },
-      { name: "Whisky Glen Grant", price: 4.0 },
-      { name: "Whisky Red Label", price: 4.0 },
-      { name: "Rum Havana Club", price: 3.5 },
-      { name: "Rum Pampero", price: 3.5 },
-    ],
-  },
-  {
-    category: "Cocktails",
-    items: [
-      { name: "Mojito", price: 6.0, desc: "Rum, lime, menta, zucchero, soda." },
-      { name: "Mojito Passion", price: 8.0, desc: "Rum, passion fruit, lime, menta, soda." },
-      { name: "Cuba Libre", price: 6.0, desc: "Rum, cola, lime." },
-      { name: "Long Island", price: 8.0, desc: "Vodka, gin, rum, tequila, triple sec, cola, limone." },
-      { name: "Cosmopolitan", price: 6.0, desc: "Vodka, triple sec, cranberry, lime." },
-      { name: "Daiquiri", price: 6.0, desc: "Rum, lime, zucchero." },
-      { name: "Moscow Mule", price: 8.0, desc: "Vodka, ginger beer, lime." },
-      { name: "Negroni", price: 6.0, desc: "Gin, vermouth rosso, Campari." },
-      { name: "Gin Tonic", price: 6.0, desc: "Gin, tonica, lime." },
-      { name: "Mimosa", price: 6.0, desc: "Prosecco, succo d’arancia." },
-      { name: "Midori Sour", price: 6.0, desc: "Midori, limone, soda (stile sour)." },
-    ],
-  },
-  {
-    category: "Analcolici",
-    items: [
-      { name: "San Francisco", price: 5.0, desc: "Succo d’arancia, ananas, grenadine." },
-      { name: "Icon", price: 6.0, desc: "Signature analcolico (chiedi la ricetta)." },
-      { name: "Rose Lemon Spritzer", price: 5.0, desc: "Limonata, note floreali, soda." },
-    ],
-  },
-];
+import { businessInfo } from "./config.js?v=20260618h";
+import { MENU } from "./menu-data.js?v=20260618h";
+import { attachTopbarShadow, enableMotion, setMetaDescription, setOpenGraph } from "./ui.js?v=20260618h";
 
 const $ = (sel) => document.querySelector(sel);
 const menuEl = $("#menu");
@@ -166,9 +10,14 @@ const resetEl = $("#reset");
 const chipsEl = document.querySelector(".chips");
 const countEl = $("#count");
 const searchWrap = document.querySelector(".search");
-const topbarEl = document.querySelector(".topbar");
+const topbarEl = document.querySelector(".menu-topbar");
 
 const euro = (n) => `${n.toFixed(2)} €`.replace(".", ",");
+
+function getSectionItems(section) {
+  if (section.items) return section.items;
+  return (section.groups || []).flatMap((group) => group.items);
+}
 
 function normalize(s) {
   return (s || "")
@@ -202,6 +51,35 @@ function getState() {
   return { q: qEl.value, chip: active };
 }
 
+function renderItem(item) {
+  const row = document.createElement("div");
+  row.className = "item";
+
+  const left = document.createElement("div");
+  left.className = "item__left";
+
+  const name = document.createElement("div");
+  name.className = "item__name";
+  name.textContent = item.name;
+  left.appendChild(name);
+
+  if (item.desc) {
+    const desc = document.createElement("div");
+    desc.className = "item__desc";
+    desc.textContent = item.desc;
+    left.appendChild(desc);
+  }
+
+  const price = document.createElement("div");
+  price.className = "item__price";
+  price.textContent = item.priceText ? item.priceText : euro(Number(item.price));
+
+  row.appendChild(left);
+  row.appendChild(price);
+
+  return row;
+}
+
 function render() {
   const { q, chip } = getState();
   const nq = normalize(q);
@@ -211,69 +89,82 @@ function render() {
 
   let shown = 0;
   let total = 0;
+  let sectionIndex = 0;
 
   for (const section of MENU) {
     if (chipFilter && section.category !== chipFilter) continue;
 
-    const filteredItems = section.items.filter((it) => {
+    const sectionItems = getSectionItems(section);
+    const filteredItems = sectionItems.filter((it) => {
       if (!nq) return true;
       const hay = normalize(`${section.category} ${it.name} ${it.desc || ""} ${it.priceText || ""}`);
       return hay.includes(nq);
     });
 
-    total += section.items.length;
+    total += sectionItems.length;
     shown += filteredItems.length;
 
     if (filteredItems.length === 0) continue;
 
     const s = document.createElement("section");
-    s.className = "section";
+    s.className = "section-card";
+    if (section.groups) s.classList.add("section-card--wide");
     s.id = `cat-${normalize(section.category).replace(/\s+/g, "-")}`;
+    s.setAttribute("data-reveal", "");
+    s.style.setProperty("--reveal-delay", `${Math.min(sectionIndex * 70, 220)}ms`);
+    sectionIndex += 1;
 
     const header = document.createElement("div");
-    header.className = "section__header";
+    header.className = "section-card__header";
 
-    const title = document.createElement("div");
-    title.className = "section__title";
+    const title = document.createElement("h2");
+    title.className = "section-card__title";
     title.textContent = section.category;
 
     const badge = document.createElement("div");
-    badge.className = "section__badge";
-    badge.textContent = `${filteredItems.length}/${section.items.length}`;
+    badge.className = "section-card__badge";
+    badge.textContent = `${filteredItems.length}/${sectionItems.length}`;
 
     header.appendChild(title);
     header.appendChild(badge);
 
-    const itemsWrap = document.createElement("div");
-    itemsWrap.className = "items";
+    let itemsWrap;
+    if (section.groups) {
+      itemsWrap = document.createElement("div");
+      itemsWrap.className = "section-card__groups";
 
-    for (const it of filteredItems) {
-      const row = document.createElement("div");
-      row.className = "item";
+      for (const group of section.groups) {
+        const matching = group.items.filter((it) => {
+          if (!nq) return true;
+          const hay = normalize(`${section.category} ${group.title} ${it.name} ${it.desc || ""} ${it.priceText || ""}`);
+          return hay.includes(nq);
+        });
 
-      const left = document.createElement("div");
-      left.className = "item__left";
+        if (!matching.length) continue;
 
-      const name = document.createElement("div");
-      name.className = "item__name";
-      name.textContent = it.name;
+        const groupWrap = document.createElement("div");
+        groupWrap.className = "items-group";
 
-      left.appendChild(name);
+        const groupTitle = document.createElement("h3");
+        groupTitle.className = "items-group__title";
+        groupTitle.textContent = group.title;
+        groupWrap.appendChild(groupTitle);
 
-      if (it.desc) {
-        const desc = document.createElement("div");
-        desc.className = "item__desc";
-        desc.textContent = it.desc;
-        left.appendChild(desc);
+        const groupItems = document.createElement("div");
+        groupItems.className = "section-card__items";
+        for (const item of matching) {
+          groupItems.appendChild(renderItem(item));
+        }
+
+        groupWrap.appendChild(groupItems);
+        itemsWrap.appendChild(groupWrap);
       }
-
-      const price = document.createElement("div");
-      price.className = "item__price";
-      price.textContent = it.priceText ? it.priceText : euro(Number(it.price));
-
-      row.appendChild(left);
-      row.appendChild(price);
-      itemsWrap.appendChild(row);
+    } else {
+      itemsWrap = document.createElement("div");
+      itemsWrap.className = "section-card__items";
+      for (const item of filteredItems) {
+        itemsWrap.appendChild(renderItem(item));
+      }
     }
 
     s.appendChild(header);
@@ -281,7 +172,7 @@ function render() {
 
     if (section.note) {
       const note = document.createElement("div");
-      note.className = "item";
+      note.className = "item item--note";
       note.innerHTML = `<div class="item__left"><div class="item__desc">${section.note}</div></div><div class="item__price"></div>`;
       s.appendChild(note);
     }
@@ -293,6 +184,7 @@ function render() {
   countEl.textContent = isFiltered ? `${shown} risultati` : `${total} prodotti`;
 
   searchWrap.classList.toggle("has-value", qEl.value.trim().length > 0);
+  enableMotion();
 }
 
 function resetAll() {
@@ -320,12 +212,16 @@ resetEl.addEventListener("click", resetAll);
 buildChips();
 render();
 
-// subtle elevation on scroll for a more premium feel
-const onScroll = () => {
-  topbarEl?.classList?.toggle("topbar--scrolled", window.scrollY > 6);
-};
-onScroll();
-window.addEventListener("scroll", onScroll, { passive: true });
+document.title = businessInfo.seo.menuTitle;
+setMetaDescription(businessInfo.seo.menuDescription);
+setOpenGraph({
+  title: businessInfo.seo.menuTitle,
+  description: businessInfo.seo.menuDescription,
+  url: `${businessInfo.seo.siteUrl}/menu`,
+  image: businessInfo.seo.ogImage,
+});
+
+attachTopbarShadow(".menu-topbar");
 
 // keep content perfectly offset under fixed topbar
 const setTopbarOffset = () => {
@@ -334,5 +230,3 @@ const setTopbarOffset = () => {
 };
 setTopbarOffset();
 window.addEventListener("resize", setTopbarOffset, { passive: true });
-
-// If this JS is included on non-menu pages, do nothing gracefully
