@@ -1,5 +1,5 @@
-import { businessInfo, homeContent } from "./config.js?v=20260618h";
-import { MENU } from "./menu-data.js?v=20260618h";
+import { businessInfo, homeContent } from "./config.js?v=20260619e";
+import { MENU } from "./menu-data.js?v=20260619e";
 import {
   attachTopbarShadow,
   enableMotion,
@@ -9,7 +9,7 @@ import {
   setCurrentYear,
   setMetaDescription,
   setOpenGraph,
-} from "./ui.js?v=20260618h";
+} from "./ui.js?v=20260619e";
 
 const app = document.querySelector("#app");
 
@@ -219,43 +219,28 @@ function buildHome() {
         <div class="container hero__inner">
           <div class="hero__content" data-reveal>
             <div class="hero__copy">
-              <h1 class="hero__title">${escapeHtml(homeContent.hero.title)}</h1>
+              <h1 class="hero__title" aria-label="${escapeHtml(homeContent.hero.title)}">
+                <span>ICON</span>
+                <span>Caffè</span>
+              </h1>
               <p class="hero__subtitle">${escapeHtml(homeContent.hero.subtitle)}</p>
               <p class="hero__lead">${escapeHtml(homeContent.hero.body)}</p>
             </div>
             <div class="hero__actions">
               <a class="btn btn--primary" href="${homeContent.hero.primaryCta.href}">${escapeHtml(homeContent.hero.primaryCta.label)}</a>
-              <a class="btn btn--secondary" href="${homeContent.hero.secondaryCta.href}">${escapeHtml(homeContent.hero.secondaryCta.label)}</a>
+              <a class="hero__textlink" href="${homeContent.hero.secondaryCta.href}">${escapeHtml(homeContent.hero.secondaryCta.label)}</a>
             </div>
-            <div class="hero__meta" aria-label="Punti chiave">
-              ${homeContent.hero.highlights
-                .map((item) => `<span class="hero-meta__item">${escapeHtml(item)}</span>`)
-                .join("")}
+            <div class="hero__details" aria-label="Informazioni essenziali">
+              <span>${escapeHtml(addressLine)}</span>
+              <span>${escapeHtml(hoursLines.join(" · "))}</span>
             </div>
+            <a class="hero__scrollcue" href="#about" aria-label="Scorri alla sezione successiva">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 5v12" />
+                <path d="m7 12 5 5 5-5" />
+              </svg>
+            </a>
           </div>
-
-          <aside class="hero-panel" data-reveal${revealStyle(120)}>
-            <span class="hero-panel__label">Orari e riferimenti</span>
-            <div class="hero-panel__list">
-              ${homeContent.hero.quickInfo
-                .map(
-                  (item) => `
-                    <div class="hero-panel__row">
-                      <span>${escapeHtml(item.label)}</span>
-                      ${
-                        item.href
-                          ? `<a href="${item.href}" target="_blank" rel="noreferrer">${escapeHtml(item.value)}</a>`
-                          : `<strong>${escapeHtml(item.value)}</strong>`
-                      }
-                    </div>
-                  `
-                )
-                .join("")}
-            </div>
-            <div class="hero-panel__footer">
-              <a class="hero-panel__cta" href="${businessInfo.mapsUrl}" target="_blank" rel="noreferrer">Come raggiungerci</a>
-            </div>
-          </aside>
         </div>
       </section>
 

@@ -82,6 +82,35 @@ export const MENU = [
     ],
   },
   {
+    category: "Cocktails",
+    groups: [
+      {
+        title: "Con alcol",
+        items: [
+          { name: "Aperol Spritz", desc: "Aperol, prosecco, soda, fetta d'arancia.", price: 5.0 },
+          { name: "Campari Spritz", desc: "Campari, prosecco, soda, fetta d'arancia.", price: 5.0 },
+          { name: "Hugo Spritz", desc: "Prosecco, sciroppo ai fiori di sambuco, soda, menta e lime.", price: 5.0 },
+          { name: "Negroni Sbagliato", desc: "Vermouth rosso, Campari, prosecco.", price: 6.0 },
+          { name: "Americano", desc: "Vermouth rosso, Campari, soda, scorza d'arancia.", price: 6.0 },
+          { name: "Gin Tonic", desc: "Gin, acqua tonica, lime.", price: 6.0 },
+          { name: "Moscow Mule", desc: "Vodka, ginger beer, lime.", price: 8.0 },
+          { name: "Mojito", desc: "Rum bianco, lime, menta fresca, zucchero, soda.", price: 6.0 },
+          { name: "Espresso Martini", desc: "Vodka, liquore al caffè, espresso, sciroppo di zucchero.", price: 7.0 },
+        ],
+      },
+      {
+        title: "Mocktails",
+        items: [
+          { name: "Virgin Spritz Negroni", desc: "Bitter analcolico, soda, agrumi.", price: 6.0 },
+          { name: "Virgin Mojito", desc: "Lime, menta fresca, zucchero di canna, soda.", price: 6.0 },
+          { name: "Ginger Lime Fizz", desc: "Ginger beer, lime fresco, soda.", price: 5.0 },
+          { name: "Rosso Ginger", desc: "Bitter rosso analcolico, ginger ale, scorza d'arancia.", price: 5.0 },
+          { name: "Tropical Analcolico", desc: "Ananas, arancia, passion fruit, lime.", price: 6.0 },
+        ],
+      },
+    ],
+  },
+  {
     category: "Liquori e distillati",
     groups: [
       {

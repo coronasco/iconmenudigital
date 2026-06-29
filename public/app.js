@@ -1,6 +1,6 @@
-import { businessInfo } from "./config.js?v=20260618h";
-import { MENU } from "./menu-data.js?v=20260618h";
-import { attachTopbarShadow, enableMotion, setMetaDescription, setOpenGraph } from "./ui.js?v=20260618h";
+import { businessInfo } from "./config.js?v=20260619e";
+import { MENU } from "./menu-data.js?v=20260619e";
+import { attachTopbarShadow, enableMotion, setMetaDescription, setOpenGraph } from "./ui.js?v=20260619e";
 
 const $ = (sel) => document.querySelector(sel);
 const menuEl = $("#menu");
@@ -109,7 +109,9 @@ function render() {
     const s = document.createElement("section");
     s.className = "section-card";
     if (section.groups) s.classList.add("section-card--wide");
+    if (section.category === "Cocktails") s.classList.add("section-card--cocktails");
     s.id = `cat-${normalize(section.category).replace(/\s+/g, "-")}`;
+    s.dataset.category = normalize(section.category).replace(/\s+/g, "-");
     s.setAttribute("data-reveal", "");
     s.style.setProperty("--reveal-delay", `${Math.min(sectionIndex * 70, 220)}ms`);
     sectionIndex += 1;
@@ -144,6 +146,7 @@ function render() {
 
         const groupWrap = document.createElement("div");
         groupWrap.className = "items-group";
+        if (section.category === "Cocktails") groupWrap.classList.add("items-group--cocktails");
 
         const groupTitle = document.createElement("h3");
         groupTitle.className = "items-group__title";

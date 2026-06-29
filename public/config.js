@@ -30,7 +30,7 @@ export const businessInfo = {
       "ICON Caffè a Torino: colazioni, caffetteria, aperitivi e cocktail in un ambiente caldo, essenziale e contemporaneo.",
     menuTitle: "Menu | ICON Caffè Torino",
     menuDescription:
-      "Menu digitale di ICON Caffè con caffetteria, bibite, panini, aperitivi, vini, birre e distillati.",
+      "Menu digitale di ICON Caffè con caffetteria, bibite, panini, aperitivi, cocktails, vini, birre e distillati.",
     ogImage: "https://iconcaffe.com/assets/bg.png",
     siteUrl: "https://iconcaffe.com",
   },
@@ -56,7 +56,7 @@ export const homeContent = {
       { label: "Orari", value: "Lun - Sab 05:00 - 23:00 · Dom 06:30 - 23:00" },
       { label: "Instagram", value: "@icon_caffe", href: "https://instagram.com/icon_caffe" },
     ],
-    highlights: ["Colazioni", "Aperitivo", "Distillati", "Ambiente curato"],
+    highlights: ["Colazioni", "Aperitivo", "Cocktails", "Ambiente curato"],
   },
   about: {
     kicker: "Il bar",
@@ -87,8 +87,8 @@ export const homeContent = {
       },
       {
         icon: "martini",
-        title: "Distillati",
-        text: "Gin, vodka, rum, whisky e selezioni classiche per un servizio preciso e pulito.",
+        title: "Cocktails",
+        text: "Spritz, classici e drink analcolici con una selezione chiara e ben bilanciata.",
       },
       {
         icon: "plate",
@@ -101,9 +101,9 @@ export const homeContent = {
     kicker: "Menu digitale",
     title: "Una selezione essenziale, pensata per accompagnare ogni momento della giornata.",
     body:
-      "Dal banco colazioni ai distillati del dopocena, il menu resta leggibile, veloce da consultare e sempre a portata di mano.",
+      "Dal banco colazioni ai cocktails della sera, il menu resta leggibile, veloce da consultare e sempre a portata di mano.",
     cta: { label: "Vai al menu completo", href: "/menu" },
-    categories: ["Caffetteria", "Aperitivo", "Panini", "Liquori e distillati"],
+    categories: ["Caffetteria", "Cocktails", "Aperitivo", "Liquori e distillati"],
   },
   gallery: {
     kicker: "Atmosfera",
