@@ -5,122 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light" />
     <title>Menu | ICON Caffè Torino</title>
-    <meta
-      name="description"
-      content="Listino digitale di ICON Caffè con caffetteria, bibite, panini, birre, vini, aperitivi e distillati."
-    />
+    <meta name="description" content="Menu digitale di ICON Caffè con caffetteria, bibite, panini, aperitivi, cocktails, vini, birre e distillati." />
     <link rel="canonical" href="https://iconcaffe.com/menu" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="it_IT" />
     <meta property="og:site_name" content="ICON Caffè" />
     <meta property="og:title" content="Menu | ICON Caffè Torino" />
-    <meta
-      property="og:description"
-      content="Listino digitale di ICON Caffè con caffetteria, bibite, panini, birre, vini, aperitivi e distillati."
-    />
+    <meta property="og:description" content="Menu digitale di ICON Caffè con caffetteria, bibite, panini, aperitivi, cocktails, vini, birre e distillati." />
     <meta property="og:url" content="https://iconcaffe.com/menu" />
     <meta property="og:image" content="https://iconcaffe.com/assets/bg.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Menu | ICON Caffè Torino" />
-    <meta
-      name="twitter:description"
-      content="Listino digitale di ICON Caffè con caffetteria, bibite, panini, birre, vini, aperitivi e distillati."
-    />
+    <meta name="twitter:description" content="Menu digitale di ICON Caffè con caffetteria, bibite, panini, aperitivi, cocktails, vini, birre e distillati." />
     <meta name="twitter:image" content="https://iconcaffe.com/assets/bg.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../styles.css?v=20260619e" />
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css?v=20260909" />
   </head>
-  <body class="page page--menu">
-    <header class="menu-topbar" role="banner">
-      <div class="menu-topbar__shell">
-        <div class="menu-topbar__inner">
-          <a class="brandmark" href="/" aria-label="Torna alla home">
-            <img class="brandmark__logo" src="../assets/logo.svg" alt="" aria-hidden="true" />
-            <span class="brandmark__label">ICON Caffè</span>
-          </a>
-          <nav class="menu-topbar__links" aria-label="Navigazione secondaria">
-            <a href="/">Home</a>
-            <a href="/#about">Il bar</a>
-            <a href="/#info">Info</a>
-          </nav>
-          <div class="search">
-            <label class="search__label" for="q">Cerca</label>
-            <input
-              id="q"
-              class="search__input"
-              inputmode="search"
-              autocomplete="off"
-              autocapitalize="none"
-              spellcheck="false"
-              placeholder="Cerca un prodotto…"
-              aria-label="Cerca nel menu"
-            />
-            <button id="clear" class="search__clear" type="button" aria-label="Cancella ricerca">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-        </div>
-        <nav class="chips" aria-label="Categorie">
-          <button class="chip is-active" data-chip="all" type="button">Tutto</button>
+  <body class="page--menu" id="top">
+    <a class="skip-link" href="#menu-results">Vai al menu</a>
+    <div class="reading-progress" aria-hidden="true"></div>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/" aria-label="ICON Caffè, torna alla home"><span class="wordmark">ICON <i>Caffè</i></span></a>
+        <nav class="menu-header-nav" aria-label="Navigazione secondaria">
+          <a href="/#about">Il bar</a>
+          <a href="/#info">Info</a>
+          <a class="menu-home" href="/">Home <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
         </nav>
       </div>
     </header>
-
-    <main class="menu-page" role="main">
-      <section class="menu-hero">
-        <div class="container">
-          <div class="menu-hero__panel" data-reveal>
-            <div class="menu-hero__intro">
-              <h1 class="menu-hero__title">Listino Icon</h1>
-              <p class="menu-hero__lead">
-                Una selezione essenziale, pensata per accompagnare con semplicità ogni momento della giornata.
-              </p>
-              <div class="menu-hero__details">
-                <span>Via Pietro Cossa 79/B, Torino</span>
-                <span>Lun - Sab 05:00 - 23:00 · Dom 06:30 - 23:00</span>
-              </div>
-              <div class="menu-hero__links">
-                <a href="https://www.google.com/maps/search/?api=1&amp;query=Via+Pietro+Cossa+79%2FB%2C+10136+Torino" target="_blank" rel="noreferrer">Indicazioni</a>
-                <a href="/">Torna al sito</a>
-              </div>
+    <main class="container menu-page">
+      <section class="menu-intro">
+        <h1 data-parallax="0.04"><span>Listino Icon</span></h1>
+        <div class="menu-intro-copy">
+          <p>Una selezione essenziale, pensata per accompagnare con semplicità ogni momento della giornata.</p>
+          <a class="scroll-cue" href="#menu-results" aria-label="Scorri al menu"><span>Scorri</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m-6-6 6 6 6-6"/></svg></a>
+        </div>
+      </section>
+      <div class="menu-layout">
+        <aside class="menu-sidebar">
+          <nav class="desktop-categories" aria-label="Categorie del menu" data-category-list></nav>
+          <p class="sidebar-note">Prezzi in €.<br>Per allergeni e disponibilità, chiedi al personale.</p>
+        </aside>
+        <div class="menu-content">
+          <div class="menu-tools" id="menu-tools">
+            <div class="search" role="search">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+              <label class="sr-only" for="q">Cerca nel menu</label>
+              <input id="q" type="search" inputmode="search" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Cerca nel menu" aria-controls="menu-results">
+              <button class="icon-button" id="clear" type="button" aria-label="Cancella ricerca" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
             </div>
-            <a class="menu-scrollcue" href="#menu-list" aria-label="Scorri al menu">
-              <span>Scorri</span>
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 5v12" />
-                <path d="m7 12 5 5 5-5" />
-              </svg>
-            </a>
+            <div class="mobile-category-bar">
+              <nav class="mobile-categories" aria-label="Categorie del menu" data-category-list></nav>
+              <button class="icon-button category-picker" type="button" id="category-picker" aria-label="Tutte le categorie" aria-haspopup="dialog" aria-controls="category-dialog" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="5" height="5" rx="1"/><rect x="15" y="4" width="5" height="5" rx="1"/><rect x="4" y="15" width="5" height="5" rx="1"/><rect x="15" y="15" width="5" height="5" rx="1"/></svg></button>
+            </div>
           </div>
-        </div>
-      </section>
-
-      <section class="menu-browser" id="menu-list">
-        <div class="container">
-          <div class="meta">
-            <div id="count" class="meta__count" aria-live="polite"></div>
-            <button id="reset" class="meta__reset" type="button">Azzera filtri</button>
+          <div class="results-meta">
+            <span id="count" role="status" aria-live="polite" aria-atomic="true"></span>
+            <button class="reset-button" id="reset" type="button" hidden>Azzera filtri</button>
           </div>
-
-          <div id="menu" class="menu" aria-label="Menu"></div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <div class="container footer__inner">
-        <div class="footer__note">
-          Prezzi in €.
-          <span class="muted">Per allergeni e disponibilità, chiedi al personale.</span>
+          <div class="drink-filters" role="group" aria-label="Tipo di cocktail" hidden>
+            <button type="button" data-drink="all" aria-pressed="true">Tutto</button>
+            <button type="button" data-drink="Con alcol" aria-pressed="false">Con alcol</button>
+            <button type="button" data-drink="Mocktails" aria-pressed="false">Mocktails</button>
+          </div>
+          <div id="menu-results" class="menu-results" aria-label="Menu"></div>
+          <div class="empty-state" id="empty" hidden>
+            <h2>Nessun risultato.</h2>
+            <p>Prova un altro nome o ingrediente, oppure consulta tutto il menu.</p>
+            <button class="text-link text-link--accent" id="empty-reset" type="button">Mostra tutto il menu <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+          </div>
         </div>
       </div>
+    </main>
+    <footer class="container menu-footer">
+      <div><p>Prezzi in €.</p><p>Per allergeni e disponibilità, chiedi al personale.</p><a class="text-link" href="/">Torna al sito</a></div>
+      <div class="footer-location" id="menu-contact"></div>
     </footer>
-
-    <script type="module" src="../app.js?v=20260619e"></script>
+    <a class="icon-button back-top" href="#top" aria-label="Torna in alto" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m-6-6 6 6 6-6"/></svg></a>
+    <dialog class="sheet" id="category-dialog" aria-labelledby="category-title">
+      <span class="sheet-handle" aria-hidden="true"></span>
+      <div class="sheet-header"><h2 id="category-title">Il menu</h2><button class="icon-button" type="button" aria-label="Chiudi categorie" data-close><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div>
+      <nav class="sheet-categories" aria-label="Scegli una categoria" data-category-list></nav>
+    </dialog>
+    <noscript><p class="container menu-error">Attiva JavaScript per consultare il menu. Per prezzi, allergeni e disponibilità, chiedi al personale.</p></noscript>
+    <script type="module" src="../app.js?v=20260909"></script>
   </body>
 </html>
