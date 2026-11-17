@@ -1,17 +1,16 @@
-import { businessInfo, homeContent } from "./config.js?v=20260909";
-import { MENU } from "./menu-data.js?v=20260909";
+import { businessInfo, homeContent } from "./config.js?v=20261117";
+import { MENU } from "./menu-data.js?v=20261117";
 import {
   icons, wordmark, escapeHtml as esc, euro, sectionItems, slug, formatAddress,
   formatHours, attachTopbarShadow, enableMotion, enableParallax, bindDialog,
   setCurrentYear, setMetaDescription, setOpenGraph, reducedMotion,
-} from "./ui.js?v=20260909";
+} from "./ui.js?v=20261117";
 
 const { hero, about, services, menuPreview, gallery, finalCta } = homeContent;
 const address = formatAddress(businessInfo.address);
 const hours = formatHours(businessInfo.hours);
-const linkAttrs = (href) => href.startsWith("http") ? 'target="_blank" rel="noreferrer"' : "";
 const categoryHref = (category) => businessInfo.menuRoute + "?category=" + slug(category);
-const label = (text) => `<p class="section-label" data-reveal>${esc(text)}</p>`;
+const external = (href) => href.startsWith("http") ? 'target="_blank" rel="noreferrer"' : "";
 
 function preview(category) {
   const section = MENU.find((entry) => entry.category === category);
@@ -40,17 +39,17 @@ document.querySelector("#app").innerHTML = `
       <div class="container">
         <div class="hero-grid">
           <div class="hero-copy">
-            <h1 class="hero-title" aria-label="${esc(hero.title)}"><span class="line"><span>ICON</span></span><span class="line"><span><i>Caffè</i></span></span></h1>
-            <p class="hero-subtitle" data-reveal style="--delay:100ms">${esc(hero.subtitle)}</p>
-            <p class="hero-lead" data-reveal style="--delay:180ms">${esc(hero.body)}</p>
-            <div class="hero-actions" data-reveal style="--delay:260ms">
+            <h1 class="hero-title" aria-label="${esc(hero.title)}"><span class="line"><span>ICON</span></span><span class="line"><span>Caffè</span></span></h1>
+            <p class="hero-subtitle" data-reveal>${esc(hero.subtitle)}</p>
+            <p class="hero-lead" data-reveal style="--delay:80ms">${esc(hero.body)}</p>
+            <div class="hero-actions" data-reveal style="--delay:140ms">
               <a class="button" href="${hero.primaryCta.href}">${esc(hero.primaryCta.label)} ${icons.arrow}</a>
               <a class="text-link" href="${hero.secondaryCta.href}">${esc(hero.secondaryCta.label)}</a>
             </div>
           </div>
-          <figure class="hero-figure">
+          <figure class="hero-figure" data-scene>
             <div class="hero-photo"><img src="/assets/bg.png" alt="${esc(businessInfo.heroImageAlt)}" width="682" height="1024" fetchpriority="high" data-parallax="0.12"></div>
-            <figcaption>${esc(hero.quickInfo[0].value)}</figcaption>
+            <figcaption><a class="hero-location" href="${businessInfo.mapsUrl}" target="_blank" rel="noreferrer">${esc(hero.quickInfo[0].value)} ${icons.diagonal}</a></figcaption>
           </figure>
         </div>
         <div class="hero-bottom">
@@ -60,100 +59,76 @@ document.querySelector("#app").innerHTML = `
       </div>
     </section>
     <section class="section about" id="about">
-      <div class="container about-grid">
-        <div>${label(about.kicker)}</div>
+      <div class="container about-layout">
         <div class="about-copy">
-          <h2 class="section-title" data-reveal>${esc(about.title)}</h2>
+          <p class="section-label">${esc(about.kicker)}</p>
+          <h2 class="section-title" data-ink>${esc(about.title)}</h2>
           <p class="section-body" data-reveal>${esc(about.body)}</p>
-          ${about.details.map((text) => `<p class="section-body" data-reveal>${esc(text)}</p>`).join("")}
-          <a class="text-link text-link--accent" href="${about.cta.href}" data-reveal>${esc(about.cta.label)} ${icons.diagonal}</a>
+          <p class="section-body" data-reveal>${about.details.map(esc).join(" ")}</p>
+          <a class="text-link" href="${about.cta.href}" data-reveal>${esc(about.cta.label)} ${icons.diagonal}</a>
         </div>
-      </div>
-      <span class="about-echo" aria-hidden="true" data-parallax="0.12">ICON</span>
-    </section>
-    <section class="section services">
-      <div class="container services-layout">
-        <div class="services-intro">
-          ${label(services.kicker)}
-          <h2 class="section-title" data-reveal>${esc(services.title)}</h2>
-          <p class="section-body" data-reveal>${esc(services.lead)}</p>
-        </div>
-        <div class="service-list">
-          ${services.items.map((item, index) => `
-            <a class="service-row" href="${categoryHref(item.title === "Pausa pranzo" ? "Panini" : item.title)}" data-reveal style="--delay:${index * 65}ms">
-              <span class="service-number" aria-hidden="true">0${index + 1}</span>
-              <h3>${esc(item.title)}</h3><p>${esc(item.text)}</p>${icons.diagonal}
-            </a>`).join("")}
+        <div class="about-services">
+          <h3 class="services-title" data-reveal>${esc(services.title)}</h3>
+          <div class="service-list">
+            ${services.items.map((item, index) => `
+              <a class="service-row" href="${categoryHref(item.title === "Pausa pranzo" ? "Panini" : item.title)}" data-reveal style="--delay:${index * 40}ms">
+                <h3>${esc(item.title)}</h3><p>${esc(item.text)}</p>${icons.diagonal}
+              </a>`).join("")}
+          </div>
         </div>
       </div>
     </section>
     <section class="section menu-preview">
       <div class="container preview-layout">
         <div class="preview-intro">
-          ${label(menuPreview.kicker)}
-          <h2 class="section-title" data-reveal>${esc(menuPreview.title)}</h2>
-          <p class="section-body" data-reveal>${esc(menuPreview.body)}</p>
+          <h2 class="section-title" data-reveal>${esc(menuPreview.kicker)}</h2>
+          <p class="section-body" data-reveal>${esc(menuPreview.title)}</p>
           <a class="button button--light" href="${menuPreview.cta.href}" data-reveal>${esc(menuPreview.cta.label)} ${icons.arrow}</a>
         </div>
         <div class="preview-list">${menuPreview.categories.map(preview).join("")}</div>
       </div>
-    </section>
-    <section class="section atmosphere">
-      <div class="container atmosphere-layout">
-        <div>
-          ${label(gallery.kicker)}
-          <h2 class="section-title" data-reveal>${esc(gallery.title)}</h2>
-          <p class="section-body" data-reveal>${esc(gallery.lead)}</p>
-        </div>
-        <figure data-reveal>
-          <div class="atmosphere-photo"><img src="/assets/bg.png" alt="${esc(gallery.items[0].alt)}" width="682" height="1024" loading="lazy" data-parallax="0.1"></div>
-          <figcaption class="atmosphere-caption"><span>${esc(gallery.items[0].title)}</span><span>${esc(gallery.items[0].note)}</span></figcaption>
-        </figure>
-      </div>
+      <div class="preview-orbit" aria-hidden="true" data-parallax="0.12"></div>
     </section>
     <section class="section info" id="info">
       <div class="container info-layout">
-        ${label("Info e contatti")}
-        <div class="info-columns">
-          <div>
-            <h2 class="section-title" data-reveal>Siamo qui per te.</h2>
-            <p class="section-body" data-reveal>Orari, indirizzo e riferimenti essenziali, facili da aggiornare e chiari da consultare.</p>
+        <div class="info-copy">
+          <p class="section-label">Info e contatti</p>
+          <h2 class="section-title" data-reveal>Siamo qui per te.</h2>
+          <p class="section-body" data-reveal>${esc(gallery.lead)}</p>
+        </div>
+        <div class="info-details">
+          <div class="info-row" data-reveal>
+            <span class="info-label">Indirizzo</span>
+            <div class="info-value"><p>${esc(address)}</p><a class="text-link" href="${businessInfo.mapsUrl}" target="_blank" rel="noreferrer">Apri la posizione su Google Maps ${icons.arrow}</a></div>
           </div>
-          <div>
-            <div class="info-row" data-reveal>
-              <span class="info-label">Indirizzo</span>
-              <div class="info-value"><p>${esc(address)}</p><a class="text-link" href="${businessInfo.mapsUrl}" target="_blank" rel="noreferrer">Apri la posizione su Google Maps ${icons.arrow}</a></div>
-            </div>
-            <div class="info-row" data-reveal>
-              <span class="info-label">Orari</span><div class="info-value">${hours.map((line) => `<p>${esc(line)}</p>`).join("")}<small>Dalla colazione all'aperitivo</small></div>
-            </div>
-            <div class="info-row" data-reveal>
-              <span class="info-label">Instagram</span><div class="info-value"><a class="text-link" href="${businessInfo.instagram.url}" target="_blank" rel="noreferrer">${esc(businessInfo.instagram.label)} ${icons.diagonal}</a><small>Novità, drink e momenti dal locale</small></div>
-            </div>
+          <div class="info-row" data-reveal>
+            <span class="info-label">Orari</span><div class="info-value">${hours.map((line) => `<p>${esc(line)}</p>`).join("")}</div>
+          </div>
+          <div class="info-row" data-reveal>
+            <span class="info-label">Instagram</span><div class="info-value"><a class="text-link" href="${businessInfo.instagram.url}" target="_blank" rel="noreferrer">${esc(businessInfo.instagram.label)} ${icons.diagonal}</a><small>Novità, drink e momenti dal locale</small></div>
           </div>
         </div>
       </div>
     </section>
     <section class="cta" id="cta">
       <div class="container cta-inner">
-        <h2 class="section-title" data-reveal>${esc(finalCta.title)}</h2>
-        <p data-reveal>${esc(finalCta.body)}</p>
+        <div><h2 class="section-title" data-reveal>${esc(finalCta.title)}</h2><p data-reveal>${esc(finalCta.body)}</p></div>
         <div class="cta-actions" data-reveal>
-          ${finalCta.buttons.map((button) => `<a class="${button.style === "primary" ? "button" : "text-link"}" href="${button.href}" ${linkAttrs(button.href)}>${esc(button.label)} ${icons.arrow}</a>`).join("")}
+          ${finalCta.buttons.map((button) => `<a class="${button.style === "primary" ? "button" : "text-link"}" href="${button.href}" ${external(button.href)}>${esc(button.label)} ${icons.arrow}</a>`).join("")}
         </div>
       </div>
     </section>
   </main>
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div class="footer-brand"><img src="/assets/logo.svg" alt="" width="28" height="50"><div>${wordmark}<small>${esc(businessInfo.descriptor)}</small></div></div>
+      <div class="footer-brand"><img src="/assets/logo.svg" alt="" width="25" height="45"><div>${wordmark}<small>${esc(businessInfo.descriptor)}</small></div></div>
       <div class="footer-links"><a href="${businessInfo.menuRoute}">Menu</a><a href="${businessInfo.instagram.url}" target="_blank" rel="noreferrer">Instagram</a><a href="${businessInfo.mapsUrl}" target="_blank" rel="noreferrer">Maps</a></div>
       <span class="footer-legal">© <span id="year"></span> ${esc(businessInfo.name)}</span>
     </div>
   </footer>
   <a class="icon-button back-top" href="#top" aria-label="Torna in alto" hidden>${icons.down}</a>
   <dialog class="sheet" id="nav-dialog" aria-labelledby="nav-title">
-    <span class="sheet-handle" aria-hidden="true"></span>
+    <span class="sheet-handle" aria-hidden="true" data-drag-handle></span>
     <div class="sheet-header"><h2 id="nav-title">ICON Caffè</h2><button class="icon-button" aria-label="Chiudi navigazione" data-close>${icons.close}</button></div>
     <nav class="sheet-nav" aria-label="Navigazione mobile">${homeContent.nav.map((item) => `<a href="${item.href}">${esc(item.label)} ${icons.diagonal}</a>`).join("")}</nav>
     <div class="sheet-contact"><p>${esc(address)}</p><p>${esc(hours.join(" · "))}</p></div>

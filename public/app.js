@@ -1,10 +1,10 @@
-import { businessInfo } from "./config.js?v=20260909";
-import { MENU } from "./menu-data.js?v=20260909";
+import { businessInfo } from "./config.js?v=20261117";
+import { MENU } from "./menu-data.js?v=20261117";
 import {
   escapeHtml as esc, euro, sectionItems, slug, icons, formatAddress, formatHours,
   attachTopbarShadow, enableMotion, enableParallax, animateRows, bindDialog,
-  reducedMotion, setMetaDescription, setOpenGraph,
-} from "./ui.js?v=20260909";
+  reducedMotion, setMetaDescription, setOpenGraph, captureRows, slidingIndicator,
+} from "./ui.js?v=20261117";
 
 const results = document.querySelector("#menu-results");
 const search = document.querySelector("#q");
@@ -49,8 +49,10 @@ for (const nav of document.querySelectorAll("[data-category-list]")) {
     </button>`).join("");
 }
 
-const rowMarkup = (item, index) => `
-  <li class="menu-item" data-reveal style="--delay:${Math.min(index % 5 * 35, 140)}ms">
+const indicators = [...document.querySelectorAll('.desktop-categories, .mobile-categories, .drink-filters')].map(slidingIndicator);
+
+const rowMarkup = (item) => `
+  <li class="menu-item">
     <div><p class="item-name">${esc(item.name)}</p>${item.desc ? `<p class="item-desc">${esc(item.desc)}</p>` : ""}</div>
     <span class="item-price">${esc(euro(item))}</span>
   </li>`;
@@ -61,7 +63,7 @@ results.innerHTML = MENU.map((section) => `
     ${(section.groups || [{ title: "", items: section.items }]).map((group) => `
       <div class="menu-group" data-group="${esc(group.title)}">
         ${group.title ? `<h3 class="group-heading">${esc(group.title)}</h3>` : ""}
-        <ul class="item-list">${group.items.map(rowMarkup).join("")}</ul>
+        <ul class="item-list" role="list">${group.items.map(rowMarkup).join("")}</ul>
       </div>`).join("")}
     ${section.note ? `<p class="item-note">${esc(section.note)}</p>` : ""}
   </section>`).join("");
@@ -95,6 +97,7 @@ function syncControls() {
     button.setAttribute("aria-pressed", String(button.dataset.drink === state.drink));
   }
   drinkFilters.hidden = state.category !== "cocktails";
+  indicators.forEach((update) => update());
   const active = mobileCategories.querySelector('[aria-pressed="true"]');
   if (active) {
     mobileCategories.scrollTo({
@@ -104,7 +107,8 @@ function syncControls() {
   }
 }
 
-function render({ animate = false, anchor = false } = {}) {
+function render({ animate = false, anchor = false, direction = 1 } = {}) {
+  const previous = animate ? captureRows(results) : null;
   const query = normalize(state.q);
   const terms = query.split(/\s+/).filter(Boolean);
   const visibleRows = [];
@@ -138,7 +142,7 @@ function render({ animate = false, anchor = false } = {}) {
     window.scrollTo({ top: document.querySelector(".menu-layout").getBoundingClientRect().top + scrollY - headerHeight, behavior: "instant" });
   }
   enableMotion(results);
-  if (animate) requestAnimationFrame(() => animateRows(visibleRows));
+  if (animate) requestAnimationFrame(() => animateRows(visibleRows, previous, direction));
 }
 
 const controlsAreSticky = () => document.querySelector(".menu-layout").getBoundingClientRect().top < document.querySelector(".site-header").offsetHeight + 5;
@@ -150,18 +154,22 @@ document.querySelectorAll("[data-category-list]").forEach((nav) => {
     if (!button) return;
     clearTimeout(searchTimer);
     if (dialog.open) await closeCategories();
+    const direction = Math.sign(categories.findIndex((entry) => entry.id === button.dataset.category)
+      - categories.findIndex((entry) => entry.id === state.category)) || 1;
     state.category = button.dataset.category;
     state.drink = "all";
     state.q = "";
     search.value = "";
     writeUrl("push");
-    render({ animate: true, anchor: true });
+    render({ animate: true, anchor: true, direction });
   });
 });
 
 drinkFilters.addEventListener("click", (event) => {
   const button = event.target.closest("[data-drink]");
   if (!button) return;
+  clearTimeout(searchTimer);
+  state.q = search.value;
   state.drink = button.dataset.drink;
   writeUrl("push");
   render({ animate: true, anchor: true });
