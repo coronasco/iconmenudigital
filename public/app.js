@@ -1,12 +1,12 @@
-import { businessInfo } from "./config.js?v=20261117c";
-import { MENU } from "./menu-data.js?v=20261117c";
-import { TEA_GROUPS } from "./tea-data.js?v=20261117c";
-import { preparationPrice, seasonalProposal } from "./menu-extras.js?v=20261117c";
+import { businessInfo } from "./config.js?v=20261117d";
+import { MENU } from "./menu-data.js?v=20261117d";
+import { TEA_GROUPS } from "./tea-data.js?v=20261117d";
+import { preparationPrice, seasonalProposal } from "./menu-extras.js?v=20261117d";
 import {
   escapeHtml as esc, euro, sectionItems, slug, icons, formatAddress, formatHours,
   attachTopbarShadow, enableReadingProgress, animateRows, bindDialog,
   reducedMotion, setMetaDescription, setOpenGraph, captureRows, slidingIndicator,
-} from "./ui.js?v=20261117c";
+} from "./ui.js?v=20261117d";
 
 const results = document.querySelector("#menu-results");
 const search = document.querySelector("#q");

@@ -1,9 +1,9 @@
-import { businessInfo, homeContent } from "./config.js?v=20261117c";
+import { businessInfo, homeContent } from "./config.js?v=20261117d";
 import {
   icons, wordmark, escapeHtml as esc, slug, formatAddress, formatHours,
   bindDialog, setCurrentYear, setMetaDescription, setOpenGraph, reducedMotion,
-} from "./ui.js?v=20261117c";
-import { initExperience } from "./experience.js?v=20261117c";
+} from "./ui.js?v=20261117d";
+import { initExperience } from "./experience.js?v=20261117d";
 
 const { hero, about, services, menuPreview } = homeContent;
 const address = formatAddress(businessInfo.address);
