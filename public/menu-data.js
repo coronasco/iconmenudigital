@@ -1,9 +1,11 @@
+import { TEA_SECTION } from "./tea-data.js?v=20261117c";
+
 export const MENU = [
   {
     category: "Caffetteria",
     items: [
-      { name: "Caffè", price: 1.3 },
-      { name: "Caffè Dek", price: 1.4 },
+      { name: "Caffè", price: 1.3, panna: 0.5 },
+      { name: "Caffè Dek", price: 1.4, panna: 0.5 },
       { name: "Caffè Corretto", price: 1.9 },
       { name: "Caffè Shakerato", price: 2.5 },
       { name: "Orzo", price: 1.4 },
@@ -11,9 +13,9 @@ export const MENU = [
       { name: "Cappuccino", price: 1.5 },
       { name: "Latte Macchiato", price: 2.0 },
       { name: "Latte (bicchiere)", price: 1.5 },
-      { name: "Marocchino", price: 2.5 },
+      { name: "Marocchino", price: 2.5, panna: 0.5 },
       { name: "Tè caldo", price: 3.0 },
-      { name: "Cioccolata calda", price: 3.0 },
+      { name: "Cioccolata calda", price: 3.0, panna: 0.5 },
       { name: "Brioche", price: 1.5 },
       { name: "Brioche salate", price: 2.2 },
       { name: "Crema caffè", priceText: "3,00 € / 4,00 €" },
@@ -22,6 +24,7 @@ export const MENU = [
       { name: "Biscotti", price: 1.5 },
     ],
   },
+  TEA_SECTION,
   {
     category: "Bibite",
     items: [

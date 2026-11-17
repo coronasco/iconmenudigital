@@ -1,25 +1,15 @@
-import { businessInfo, homeContent } from "./config.js?v=20261117";
-import { MENU } from "./menu-data.js?v=20261117";
+import { businessInfo, homeContent } from "./config.js?v=20261117c";
 import {
-  icons, wordmark, escapeHtml as esc, euro, sectionItems, slug, formatAddress,
-  formatHours, attachTopbarShadow, enableMotion, enableParallax, bindDialog,
-  setCurrentYear, setMetaDescription, setOpenGraph, reducedMotion,
-} from "./ui.js?v=20261117";
+  icons, wordmark, escapeHtml as esc, slug, formatAddress, formatHours,
+  bindDialog, setCurrentYear, setMetaDescription, setOpenGraph, reducedMotion,
+} from "./ui.js?v=20261117c";
+import { initExperience } from "./experience.js?v=20261117c";
 
-const { hero, about, services, menuPreview, gallery, finalCta } = homeContent;
+const { hero, about, services, menuPreview } = homeContent;
 const address = formatAddress(businessInfo.address);
 const hours = formatHours(businessInfo.hours);
 const categoryHref = (category) => businessInfo.menuRoute + "?category=" + slug(category);
-const external = (href) => href.startsWith("http") ? 'target="_blank" rel="noreferrer"' : "";
-
-function preview(category) {
-  const section = MENU.find((entry) => entry.category === category);
-  if (!section) return "";
-  return `<div class="preview-category" data-reveal>
-    <a class="preview-category-title" href="${categoryHref(category)}"><span>${esc(category)}</span>${icons.diagonal}</a>
-    ${sectionItems(section).slice(0, 2).map((item) => `<div class="preview-item"><span>${esc(item.name)}</span><strong>${esc(euro(item))}</strong></div>`).join("")}
-  </div>`;
-}
+const nav = homeContent.nav.filter((item) => ["Il bar", "Menu", "Contatti"].includes(item.label));
 
 document.querySelector("#app").innerHTML = `
   <a class="skip-link" href="#main">Vai al contenuto</a>
@@ -27,110 +17,86 @@ document.querySelector("#app").innerHTML = `
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="/" aria-label="${esc(businessInfo.name)}">${wordmark}</a>
-      <nav class="main-nav" aria-label="Navigazione principale">
-        ${homeContent.nav.map((item) => `<a href="${item.href}">${esc(item.label)}</a>`).join("")}
-      </nav>
+      <nav class="main-nav" aria-label="Navigazione principale">${nav.map((item) => `<a href="${item.href}">${esc(item.label)}</a>`).join("")}</nav>
       <a class="header-cta" href="${businessInfo.menuRoute}">Apri il menu ${icons.diagonal}</a>
       <button class="icon-button nav-toggle" id="nav-toggle" aria-label="Apri navigazione" aria-haspopup="dialog" aria-controls="nav-dialog" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
   <main id="main">
-    <section class="hero" id="top">
+    <section class="hero-scene" id="top" aria-label="ICON Caffè">
+      <div class="hero-stage">
+        <div class="hero-media"><img src="/assets/bg.png" alt="${esc(businessInfo.heroImageAlt)}" width="682" height="1024" fetchpriority="high"></div>
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="container hero-content">
+          <div class="hero-intro"><p>${esc(hero.subtitle)}</p><span>Torino, Italia</span></div>
+          <div class="hero-lockup">
+            <h1 class="hero-title" aria-label="ICON Caffè">${[..."ICON"].map((letter, i) => `<span class="hero-letter" aria-hidden="true" style="--i:${i}"><span>${letter}</span></span>`).join("")}</h1>
+            <div class="hero-signature"><span>Caffè</span><span>Dal primo espresso<br>all'aperitivo.</span></div>
+          </div>
+          <div class="hero-bottom">
+            <a class="hero-menu" href="${businessInfo.menuRoute}"><span>Apri il menu</span><span class="arrow-disc">${icons.diagonal}</span></a>
+            <a class="hero-address" href="${businessInfo.mapsUrl}" target="_blank" rel="noreferrer">${esc(hero.quickInfo[0].value)}</a>
+            <a class="scroll-cue" href="#about" aria-label="Scopri il bar">${icons.down}</a>
+          </div>
+        </div>
+        <div class="hero-frame" aria-hidden="true"></div>
+      </div>
+    </section>
+    <section class="intro-section" id="about" data-scene>
       <div class="container">
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <h1 class="hero-title" aria-label="${esc(hero.title)}"><span class="line"><span>ICON</span></span><span class="line"><span>Caffè</span></span></h1>
-            <p class="hero-subtitle" data-reveal>${esc(hero.subtitle)}</p>
-            <p class="hero-lead" data-reveal style="--delay:80ms">${esc(hero.body)}</p>
-            <div class="hero-actions" data-reveal style="--delay:140ms">
-              <a class="button" href="${hero.primaryCta.href}">${esc(hero.primaryCta.label)} ${icons.arrow}</a>
-              <a class="text-link" href="${hero.secondaryCta.href}">${esc(hero.secondaryCta.label)}</a>
-            </div>
-          </div>
-          <figure class="hero-figure" data-scene>
-            <div class="hero-photo"><img src="/assets/bg.png" alt="${esc(businessInfo.heroImageAlt)}" width="682" height="1024" fetchpriority="high" data-parallax="0.12"></div>
-            <figcaption><a class="hero-location" href="${businessInfo.mapsUrl}" target="_blank" rel="noreferrer">${esc(hero.quickInfo[0].value)} ${icons.diagonal}</a></figcaption>
-          </figure>
-        </div>
-        <div class="hero-bottom">
-          <span>${esc(hero.quickInfo[1].value)}</span>
-          <a class="scroll-cue" href="#about"><span>Il bar</span>${icons.down}</a>
+        <div class="section-meta"><span>01 / Il bar</span><span>ICON Caffè, Torino</span></div>
+        <div class="intro-layout">
+          <h2 class="statement" aria-label="${esc(about.title)}">
+            <span class="statement-line"><span data-line="0">Semplice,</span></span>
+            <span class="statement-line"><span data-line="1">curato,</span></span>
+            <span class="statement-line statement-line--accent"><span data-line="2">contemporaneo.</span></span>
+          </h2>
+          <div class="intro-copy"><p>${esc(about.body)}</p><p>${esc(about.details[0])}</p><a class="text-link" href="${about.cta.href}">${esc(about.cta.label)} ${icons.diagonal}</a></div>
         </div>
       </div>
     </section>
-    <section class="section about" id="about">
-      <div class="container about-layout">
-        <div class="about-copy">
-          <p class="section-label">${esc(about.kicker)}</p>
-          <h2 class="section-title" data-ink>${esc(about.title)}</h2>
-          <p class="section-body" data-reveal>${esc(about.body)}</p>
-          <p class="section-body" data-reveal>${about.details.map(esc).join(" ")}</p>
-          <a class="text-link" href="${about.cta.href}" data-reveal>${esc(about.cta.label)} ${icons.diagonal}</a>
-        </div>
-        <div class="about-services">
-          <h3 class="services-title" data-reveal>${esc(services.title)}</h3>
-          <div class="service-list">
-            ${services.items.map((item, index) => `
-              <a class="service-row" href="${categoryHref(item.title === "Pausa pranzo" ? "Panini" : item.title)}" data-reveal style="--delay:${index * 40}ms">
-                <h3>${esc(item.title)}</h3><p>${esc(item.text)}</p>${icons.diagonal}
-              </a>`).join("")}
-          </div>
+    <section class="ritual-section" data-scene>
+      <div class="container">
+        <div class="ritual-heading"><h2>${esc(services.title)}</h2><p>${esc(services.lead)}</p></div>
+        <div class="ritual-list">
+          ${services.items.map((item, index) => `
+            <a class="ritual-row" href="${categoryHref(item.title === "Pausa pranzo" ? "Panini" : item.title)}" data-ritual>
+              <span class="ritual-index">0${index + 1}</span>
+              <h3><span>${esc(item.title)}</span></h3>
+              <p>${esc(item.text)}</p><span class="ritual-arrow">${icons.diagonal}</span>
+            </a>`).join("")}
         </div>
       </div>
     </section>
-    <section class="section menu-preview">
-      <div class="container preview-layout">
-        <div class="preview-intro">
-          <h2 class="section-title" data-reveal>${esc(menuPreview.kicker)}</h2>
-          <p class="section-body" data-reveal>${esc(menuPreview.title)}</p>
-          <a class="button button--light" href="${menuPreview.cta.href}" data-reveal>${esc(menuPreview.cta.label)} ${icons.arrow}</a>
-        </div>
-        <div class="preview-list">${menuPreview.categories.map(preview).join("")}</div>
-      </div>
-      <div class="preview-orbit" aria-hidden="true" data-parallax="0.12"></div>
-    </section>
-    <section class="section info" id="info">
-      <div class="container info-layout">
-        <div class="info-copy">
-          <p class="section-label">Info e contatti</p>
-          <h2 class="section-title" data-reveal>Siamo qui per te.</h2>
-          <p class="section-body" data-reveal>${esc(gallery.lead)}</p>
-        </div>
-        <div class="info-details">
-          <div class="info-row" data-reveal>
-            <span class="info-label">Indirizzo</span>
-            <div class="info-value"><p>${esc(address)}</p><a class="text-link" href="${businessInfo.mapsUrl}" target="_blank" rel="noreferrer">Apri la posizione su Google Maps ${icons.arrow}</a></div>
-          </div>
-          <div class="info-row" data-reveal>
-            <span class="info-label">Orari</span><div class="info-value">${hours.map((line) => `<p>${esc(line)}</p>`).join("")}</div>
-          </div>
-          <div class="info-row" data-reveal>
-            <span class="info-label">Instagram</span><div class="info-value"><a class="text-link" href="${businessInfo.instagram.url}" target="_blank" rel="noreferrer">${esc(businessInfo.instagram.label)} ${icons.diagonal}</a><small>Novità, drink e momenti dal locale</small></div>
-          </div>
-        </div>
+    <section class="menu-invitation" data-scene>
+      <div class="container">
+        <div class="section-meta"><span>02 / ${esc(menuPreview.kicker)}</span><span>Caffetteria & cocktails</span></div>
+        <a class="menu-portal" href="${businessInfo.menuRoute}" aria-label="Vai al menu completo">
+          <span class="portal-type" aria-hidden="true"><span>Il menu.</span></span><span class="portal-arrow">${icons.diagonal}</span>
+        </a>
+        <div class="invitation-bottom"><p>${esc(menuPreview.title)}</p><a class="text-link" href="${businessInfo.menuRoute}">${esc(menuPreview.cta.label)} ${icons.arrow}</a></div>
       </div>
     </section>
-    <section class="cta" id="cta">
-      <div class="container cta-inner">
-        <div><h2 class="section-title" data-reveal>${esc(finalCta.title)}</h2><p data-reveal>${esc(finalCta.body)}</p></div>
-        <div class="cta-actions" data-reveal>
-          ${finalCta.buttons.map((button) => `<a class="${button.style === "primary" ? "button" : "text-link"}" href="${button.href}" ${external(button.href)}>${esc(button.label)} ${icons.arrow}</a>`).join("")}
+    <section class="contact-section" id="info">
+      <div class="container" id="cta">
+        <div class="section-meta"><span>03 / Info e contatti</span><span>Ci trovi qui</span></div>
+        <div class="contact-heading"><h2>Siamo qui<br>per te.</h2><a class="contact-direction" href="${businessInfo.mapsUrl}" target="_blank" rel="noreferrer" aria-label="Come raggiungerci">${icons.diagonal}</a></div>
+        <div class="contact-grid">
+          <div><h3>Indirizzo</h3><a href="${businessInfo.mapsUrl}" target="_blank" rel="noreferrer">${esc(businessInfo.address.street)}<br>${esc(businessInfo.address.postalCode)} ${esc(businessInfo.address.city)} (${esc(businessInfo.address.region)}) ${icons.diagonal}</a></div>
+          <div><h3>Orari</h3>${hours.map((line) => `<p>${esc(line)}</p>`).join("")}</div>
+          <div><h3>Restiamo in contatto</h3><a href="${businessInfo.instagram.url}" target="_blank" rel="noreferrer">${esc(businessInfo.instagram.label)} ${icons.diagonal}</a><a href="${businessInfo.menuRoute}">Menu digitale ${icons.diagonal}</a></div>
         </div>
       </div>
     </section>
   </main>
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand"><img src="/assets/logo.svg" alt="" width="25" height="45"><div>${wordmark}<small>${esc(businessInfo.descriptor)}</small></div></div>
-      <div class="footer-links"><a href="${businessInfo.menuRoute}">Menu</a><a href="${businessInfo.instagram.url}" target="_blank" rel="noreferrer">Instagram</a><a href="${businessInfo.mapsUrl}" target="_blank" rel="noreferrer">Maps</a></div>
-      <span class="footer-legal">© <span id="year"></span> ${esc(businessInfo.name)}</span>
-    </div>
+  <footer class="site-footer" data-scene>
+    <div class="container footer-word" aria-hidden="true"><span>ICON</span><small>Caffè</small></div>
+    <div class="container footer-bottom"><span>© <span id="year"></span> ${esc(businessInfo.name)}</span><span>${esc(businessInfo.descriptor)}</span><a href="#top">Torna in alto ${icons.arrow}</a></div>
   </footer>
-  <a class="icon-button back-top" href="#top" aria-label="Torna in alto" hidden>${icons.down}</a>
-  <dialog class="sheet" id="nav-dialog" aria-labelledby="nav-title">
+  <dialog class="sheet navigation-sheet" id="nav-dialog" aria-labelledby="nav-title">
     <span class="sheet-handle" aria-hidden="true" data-drag-handle></span>
     <div class="sheet-header"><h2 id="nav-title">ICON Caffè</h2><button class="icon-button" aria-label="Chiudi navigazione" data-close>${icons.close}</button></div>
-    <nav class="sheet-nav" aria-label="Navigazione mobile">${homeContent.nav.map((item) => `<a href="${item.href}">${esc(item.label)} ${icons.diagonal}</a>`).join("")}</nav>
+    <nav class="sheet-nav" aria-label="Navigazione mobile">${homeContent.nav.map((item, index) => `<a href="${item.href}"><small>0${index + 1}</small><span>${esc(item.label)}</span>${icons.diagonal}</a>`).join("")}</nav>
     <div class="sheet-contact"><p>${esc(address)}</p><p>${esc(hours.join(" · "))}</p></div>
   </dialog>
 `;
@@ -146,9 +112,7 @@ dialog.querySelectorAll("a").forEach((anchor) => anchor.addEventListener("click"
 }));
 
 setCurrentYear("#year");
-attachTopbarShadow(".site-header");
-enableMotion();
-enableParallax();
+initExperience();
 document.title = businessInfo.seo.homeTitle;
 setMetaDescription(businessInfo.seo.homeDescription);
 setOpenGraph({ title: businessInfo.seo.homeTitle, description: businessInfo.seo.homeDescription, url: businessInfo.seo.siteUrl, image: businessInfo.seo.ogImage });

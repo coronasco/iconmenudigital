@@ -65,7 +65,8 @@ test("reduced motion skips list animations", () => {
 });
 
 test("menu keeps all products, cocktail groups, and displayed prices", () => {
-  assert.equal(MENU.flatMap(sectionItems).length, 110);
+  assert.equal(MENU.filter((section) => section.kind !== "tea").flatMap(sectionItems).length, 110);
+  assert.equal(MENU.flatMap(sectionItems).length, 124);
   const cocktails = MENU.find((section) => section.category === "Cocktails");
   assert.deepEqual(cocktails.groups.map((group) => [group.title, group.items.length]), [["Con alcol", 9], ["Mocktails", 5]]);
   assert.ok(cocktails.groups.flatMap((group) => group.items).every((item) => item.desc && euro(item)));

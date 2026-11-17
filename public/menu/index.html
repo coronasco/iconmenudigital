@@ -20,8 +20,8 @@
     <meta name="twitter:image" content="https://iconcaffe.com/assets/bg.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Outfit:wght@400;500;600;650;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="../styles.css?v=20261117" />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css?v=20261117c" />
   </head>
   <body class="page--menu" id="top">
     <a class="skip-link" href="#menu-results">Vai al menu</a>
@@ -38,7 +38,7 @@
     </header>
     <main class="container menu-page">
       <section class="menu-intro">
-        <h1 data-parallax="0.04"><span>Listino Icon</span></h1>
+        <h1><span>Listino Icon</span></h1>
         <div class="menu-intro-copy">
           <p>Una selezione essenziale, pensata per accompagnare con semplicità ogni momento della giornata.</p>
           <a class="scroll-cue" href="#menu-results" aria-label="Scorri al menu"><span>Scorri</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m-6-6 6 6 6-6"/></svg></a>
@@ -50,6 +50,7 @@
           <p class="sidebar-note">Prezzi in €.<br>Per allergeni e disponibilità, chiedi al personale.</p>
         </aside>
         <div class="menu-content">
+          <aside class="seasonal-proposal" id="seasonal-proposal" aria-labelledby="proposal-title" hidden></aside>
           <div class="menu-tools" id="menu-tools">
             <div class="search" role="search">
               <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
@@ -71,6 +72,8 @@
             <button type="button" data-drink="Con alcol" aria-pressed="false">Con alcol</button>
             <button type="button" data-drink="Mocktails" aria-pressed="false">Mocktails</button>
           </div>
+          <div class="tea-filters" role="group" aria-label="Tipo di tè o tisana" hidden></div>
+          <p class="sr-only" id="preparation-status" role="status" aria-live="polite" aria-atomic="true"></p>
           <div id="menu-results" class="menu-results" aria-label="Menu"></div>
           <div class="empty-state" id="empty" hidden>
             <h2>Nessun risultato.</h2>
@@ -91,6 +94,6 @@
       <nav class="sheet-categories" aria-label="Scegli una categoria" data-category-list></nav>
     </dialog>
     <noscript><p class="container menu-error">Attiva JavaScript per consultare il menu. Per prezzi, allergeni e disponibilità, chiedi al personale.</p></noscript>
-    <script type="module" src="../app.js?v=20261117"></script>
+    <script type="module" src="../app.js?v=20261117c"></script>
   </body>
 </html>

@@ -39,29 +39,6 @@ export function attachTopbarShadow(selector) {
   window.addEventListener("scroll", onScroll, { passive: true });
 }
 
-let revealObserver;
-const observed = new WeakSet();
-
-export function enableMotion(root = document) {
-  if (!revealObserver && "IntersectionObserver" in window) {
-    revealObserver = new IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        entry.target.classList.add("is-visible");
-        revealObserver.unobserve(entry.target);
-      }
-    }, { threshold: 0.06, rootMargin: "0px 0px -18px 0px" });
-  }
-  for (const element of root.querySelectorAll("[data-reveal]")) {
-    if (observed.has(element)) continue;
-    observed.add(element);
-    if (reducedMotion() || !revealObserver) element.classList.add("is-visible");
-    else {
-      element.classList.add("will-reveal");
-      revealObserver.observe(element);
-    }
-  }
-}
 
 export function captureRows(root) {
   const positions = new Map();
@@ -87,12 +64,12 @@ export function animateRows(rows, previous = null, direction = 1) {
       row.animate([
         { transform: `translateY(${delta}px)` },
         { transform: "translateY(0)" },
-      ], { duration: 440, easing: "cubic-bezier(.22,1,.36,1)" });
+      ], { duration: 360, easing: "cubic-bezier(.16,1,.3,1)" });
     } else {
       row.animate([
-        { transform: `translateX(${direction * 24}px)`, clipPath: "inset(0 0 95% 0)" },
-        { transform: "translateX(0)", clipPath: "inset(0 0 0% 0)" },
-      ], { duration: 380, delay: Math.min(index++ * 24, 120), easing: "cubic-bezier(.22,1,.36,1)", fill: "backwards" });
+        { transform: `perspective(900px) translateX(${direction * 12}px) translateY(12px) rotateX(3deg)` },
+        { transform: "perspective(900px) translateX(0) translateY(0) rotateX(0)" },
+      ], { duration: 420, delay: Math.min(index++ * 12, 60), easing: "cubic-bezier(.16,1,.3,1)", fill: "backwards" });
     }
   }
 }
@@ -107,7 +84,7 @@ export function slidingIndicator(container) {
     const selected = container.querySelector('[aria-pressed="true"]');
     if (!selected || !container.offsetWidth) return;
     indicator.style.transition = positioned && !reducedMotion()
-      ? "transform 420ms cubic-bezier(.2,.9,.25,1.12), width 420ms cubic-bezier(.22,1,.36,1), height 420ms cubic-bezier(.22,1,.36,1)"
+      ? "transform 460ms cubic-bezier(.16,1,.3,1), width 460ms cubic-bezier(.16,1,.3,1), height 460ms cubic-bezier(.16,1,.3,1)"
       : "none";
     indicator.style.width = selected.offsetWidth + "px";
     indicator.style.height = selected.offsetHeight + "px";
@@ -119,66 +96,20 @@ export function slidingIndicator(container) {
   return update;
 }
 
-export function enableParallax() {
-  const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const elements = [...document.querySelectorAll("[data-parallax]")].map((element) => ({ element, current: 0 }));
-  const scenes = [...document.querySelectorAll("[data-scene]")];
-  const ink = [...document.querySelectorAll("[data-ink]")].map((element) => {
-    const text = element.textContent.trim();
-    element.classList.add("ink-title");
-    element.setAttribute("aria-label", text);
-    element.replaceChildren();
-    text.split(/\s+/).forEach((word, index) => {
-      if (index) element.append(" ");
-      const span = document.createElement("span");
-      span.className = "ink-word";
-      span.textContent = span.dataset.word = word;
-      span.setAttribute("aria-hidden", "true");
-      element.append(span);
-    });
-    return { element, words: [...element.children] };
-  });
+export function enableReadingProgress() {
   const progress = document.querySelector(".reading-progress");
   const backTop = document.querySelector(".back-top");
   let frame = 0;
-  let lastTime = 0;
-  const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
-  const update = (time) => {
-    const alpha = 1 - Math.exp(-Math.min(64, time - (lastTime || time - 16)) / 70);
-    lastTime = time;
+  const update = () => {
     frame = 0;
-    let settling = false;
-    for (const item of elements) {
-      const rect = item.element.parentElement.getBoundingClientRect();
-      if (rect.bottom < -100 || rect.top > innerHeight + 100) continue;
-      const target = preference.matches ? 0 : clamp(
-        (innerHeight / 2 - rect.top - rect.height / 2) * Number(item.element.dataset.parallax), -42, 42);
-      item.current += (target - item.current) * alpha;
-      if (Math.abs(target - item.current) > .1) settling = true;
-      else item.current = target;
-      item.element.style.setProperty("--parallax-y", item.current.toFixed(2) + "px");
-    }
-    for (const scene of scenes) {
-      const rect = scene.getBoundingClientRect();
-      const amount = preference.matches ? 0 : clamp(-rect.top / innerHeight, 0, 1);
-      scene.style.setProperty("--scene-progress", amount.toFixed(3));
-      scene.style.setProperty("--media-scale", (1.14 + amount * .06).toFixed(3));
-    }
-    for (const { element, words } of ink) {
-      const rect = element.getBoundingClientRect();
-      const amount = preference.matches ? 1 : clamp((innerHeight * .86 - rect.top) / (innerHeight * .42), 0, 1);
-      words.forEach((word, index) => word.style.setProperty("--word-fill",
-        clamp((amount * (words.length + 1) - index) * 100, 0, 100).toFixed(1) + "%"));
-    }
     const distance = document.documentElement.scrollHeight - innerHeight;
-    if (progress) progress.style.transform = `scaleX(${distance > 0 ? clamp(scrollY / distance, 0, 1) : 0})`;
+    const amount = distance > 0 ? Math.min(1, Math.max(0, scrollY / distance)) : 0;
+    if (progress) progress.style.transform = `scaleX(${amount})`;
     if (backTop) backTop.hidden = scrollY < innerHeight * 1.2;
-    if (settling) frame = requestAnimationFrame(update);
   };
   const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
   window.addEventListener("scroll", schedule, { passive: true });
   window.addEventListener("resize", schedule, { passive: true });
-  preference.addEventListener("change", schedule);
   new ResizeObserver(schedule).observe(document.body);
   schedule();
 }
@@ -212,9 +143,8 @@ export function bindDialog(dialog, opener) {
     if (!reducedMotion()) {
       animate([
         { transform: "translateY(100%)" },
-        { transform: "translateY(-6px)", offset: .78 },
         { transform: "translateY(0)" },
-      ], { duration: 460, easing: "cubic-bezier(.22,1,.36,1)" });
+      ], { duration: 500, easing: "cubic-bezier(.16,1,.3,1)" });
       dialog.querySelectorAll("nav button, nav a").forEach((row, index) => row.animate([
         { transform: "translateY(18px)" }, { transform: "translateY(0)" },
       ], { duration: 420, delay: Math.min(index * 20, 140), easing: "cubic-bezier(.22,1,.36,1)", fill: "backwards" }));
